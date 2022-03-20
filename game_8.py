@@ -11,6 +11,7 @@ screen = pygame.display.set_mode([500, 500])
 
 print(Glom, type(Glom))
 c = Glom()
+score = 0
 print('success')
 
 # Run until the user asks to quit
@@ -28,10 +29,16 @@ while running:
 #     # Fill the background with white
     screen.fill((255, 255, 255))
 
-#     # draw
-    c.draw(screen)
+#     # 
+    mouse_pos = pygame.mouse.get_pos()
+    mouse_click = pygame.mouse.get_pressed()[0]
+    
+    score_ = c.draw(screen,mouse_pos,mouse_click)
+    if score_=="+1":
+        score+=1
 #     # Flip the display
     pygame.display.flip()
+    print(score)
 
 # # Done! Time to quit.
 # pygame.quit()
