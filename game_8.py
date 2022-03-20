@@ -5,10 +5,13 @@ import random
 import pygame
 from glom import Glom
 pygame.init()
+pygame.font.init()
+font = pygame.font.SysFont('Comic Sans MS',30)
+textrender = font.render("hello",False,(255,0,0))
+x = 0
 
 # # Set up the drawing window
 screen = pygame.display.set_mode([500, 500])
-
 print(Glom, type(Glom))
 c = Glom()
 score = 0
@@ -28,7 +31,10 @@ while running:
 
 #     # Fill the background with white
     screen.fill((255, 255, 255))
-
+    x +=1 
+    xx = str(x)
+    textrender = font.render(xx,False,(255,0,0))
+    screen.blit(textrender,(100,100))
 #     # 
     mouse_pos = pygame.mouse.get_pos()
     mouse_click = pygame.mouse.get_pressed()[0]
@@ -39,6 +45,8 @@ while running:
 #     # Flip the display
     pygame.display.flip()
     print(score)
+
+
 
 # # Done! Time to quit.
 # pygame.quit()

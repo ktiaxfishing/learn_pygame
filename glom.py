@@ -26,4 +26,4 @@ class Glom:
         return score
         
     # def area():
-         
+     
