@@ -12,9 +12,9 @@ x = 0
 
 # # Set up the drawing window
 screen = pygame.display.set_mode([500, 500])
-
 print(Glom, type(Glom))
 c = Glom()
+score = 0
 print('success')
 score = 0
 hold = False
@@ -65,6 +65,9 @@ while running:
     pygame.draw.circle(screen, (255,0,0), (mouse_pos[0], mouse_pos[1]),5)
 #     # Flip the display
     pygame.display.flip()
+    print(score)
+
+
 
 # # Done! Time to quit.
 # pygame.quit()
