@@ -30,7 +30,6 @@ while running:
             running = False
 
         
-        
 
 #     # Fill the background with white
     screen.fill((255, 255, 255))
@@ -58,14 +57,12 @@ while running:
         score -=1
     elif point == "-0.5":
         score -= 0.5
-    print(score,hold,fire)
     score_ = c.draw(screen,mouse_pos,left)
     if score_ =="+1":
         score+=1
     pygame.draw.circle(screen, (255,0,0), (mouse_pos[0], mouse_pos[1]),5)
 #     # Flip the display
     pygame.display.flip()
-    print(score)
 
 
 
