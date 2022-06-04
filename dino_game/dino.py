@@ -1,18 +1,19 @@
 import pygame
 
 class Dino:
-    def __init__(self, img_list, ground=400):
+    def __init__(self, img_list, ground=400, width=0):
         assert type(img_list) == list
         assert type(img_list[0]) == pygame.Surface
         self.img_list = img_list
         self.img_index = 0
         self.changing_img_at_frame = 20
         self.ground = ground
-        self.x = 30
+        self.x = 50
         self.y = self.ground
         self.jumping_speed = 0
         self.mode = 'walk'
         self.count_frame = 0
+        self.width = width
 
     def next_img(self):
         self.img_index += 1

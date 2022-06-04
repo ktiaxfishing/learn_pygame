@@ -7,9 +7,14 @@ class Cactus:
         self.x = w
         self.y = h - 80
         self.color = (255,0,0)
+        self.r = 30
+        self.width = self.r * 2
     def update(self):
         self.x -= 10
         self.draw()
+      
+            
+           
     def draw(self):
         pos = self.x, self.y
-        pygame.draw.circle(self.screen, self.color, pos, 30)
+        pygame.draw.circle(self.screen, self.color, pos, self.r)

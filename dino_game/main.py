@@ -17,13 +17,16 @@ BLUE = (0,0,255)
 color_name = 0
 horizontal = 100
 vertical = 100
-font = pygame.font.SysFont("Commic SansMS",30)
+font = pygame.font.SysFont("commic sansms",30)
 clock = pygame.time.Clock()
 dino_pos = (50,50)
 ran_time = random.randint(1,3)
 now =  time.time()
 next_cactus_time = ran_time + now
-
+dino_w = 100
+RED =(255,0,0)
+WHITE = (255,255,255)
+bgc = WHITE
 # load images
 pink_text_img = font.render("pink",False,PINK)
 blue_text_img = font.render("blue",False,BLUE)
@@ -40,7 +43,7 @@ no_click_text_img = font.render(" ",False,PINK)
 dino_img_list = []
 for i in range(1, 4):
     img = pygame.image.load('./picture/dino_%d.png'%(i))
-    img = mylib.rescale_img(img, width=100)
+    img = mylib.rescale_img(img, width=dino_w)
     dino_img_list.append(img)
 
 
@@ -49,11 +52,30 @@ screen = pygame.display.set_mode([500, 500])
 w, h = pygame.display.get_surface().get_size()
 
 # init dino
-dino = Dino(dino_img_list, ground = h-130)
+dino = Dino(dino_img_list, ground = h-130,width = dino_w)
 
 # variables
 counter = 0
 cactus_list = []
+
+def dino_hit(dino, cactus):
+    x_dino = dino.x
+    width_dino = dino.width
+    x_cactus = cactus.x
+    front_dino = dino.x + dino.width
+    back_dino = dino.x
+    front_cactus = cactus.x + cactus.width/2
+    back_cactus = cactus.x - cactus.width/2
+    if front_dino > back_cactus and back_dino < front_cactus:
+        # change background color to red
+        return 'red'
+    return 'white'
+    # if back_dino > front_cactus and front_dino < back_cactus:
+        # change background color to white
+        # bgc = WHITE
+
+    
+
 
 # loop
 running = True
@@ -73,6 +95,13 @@ while running:
     ##########         #############
     ################################
 
+    if len(cactus_list) > 0:
+        color = dino_hit(dino, cactus_list[0])
+        if color == 'red':
+            bgc = RED
+        elif color == 'white':
+            bgc = WHITE
+
     # close button
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -90,13 +119,12 @@ while running:
 
     # new cactus system
     now = time.time()
-    print(now)
     if now > next_cactus_time:
+        cactus_list = []
         cactus_list.append(Cactus(screen))
         ran_time = random.randint(1,3)
         next_cactus_time = ran_time + now
     
-    print(now,next_cactus_time)
 
 
 
@@ -131,7 +159,7 @@ while running:
     ################################
 
     # fill background
-    screen.fill((255, 255, 255))
+    screen.fill(bgc)
 
     # blit text img
     if text_color == 'pink':
