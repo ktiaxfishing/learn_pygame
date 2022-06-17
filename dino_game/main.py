@@ -27,9 +27,13 @@ dino_w = 100
 RED =(255,0,0)
 WHITE = (255,255,255)
 bgc = WHITE
+score = 10
 # load images
 pink_text_img = font.render("pink",False,PINK)
 blue_text_img = font.render("blue",False,BLUE)
+score_text_img = font.render(score,False,BLUE)
+
+
 click_text_img = font.render("click",False,PINK)
 
 no_click_text_img = font.render(" ",False,PINK)
@@ -57,6 +61,7 @@ dino = Dino(dino_img_list, ground = h-130,width = dino_w)
 # variables
 counter = 0
 cactus_list = []
+can_cal_score = True
 
 def dino_hit(dino, cactus):
     x_dino = dino.x
@@ -66,16 +71,27 @@ def dino_hit(dino, cactus):
     back_dino = dino.x
     front_cactus = cactus.x + cactus.width/2
     back_cactus = cactus.x - cactus.width/2
+    
+    y_dino = dino.y
+    y_cactus = cactus.y
+    
+    
+
+
+
     if front_dino > back_cactus and back_dino < front_cactus:
+        if y_dino < 320:
+            return 'white'
         # change background color to red
         return 'red'
+
+ 
     return 'white'
+    
+    
     # if back_dino > front_cactus and front_dino < back_cactus:
         # change background color to white
         # bgc = WHITE
-
-    
-
 
 # loop
 running = True
@@ -101,7 +117,7 @@ while running:
             bgc = RED
         elif color == 'white':
             bgc = WHITE
-
+  
     # close button
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -124,8 +140,7 @@ while running:
         cactus_list.append(Cactus(screen))
         ran_time = random.randint(1,3)
         next_cactus_time = ran_time + now
-    
-
+        can_cal_score = True
 
 
     # text color
@@ -152,6 +167,13 @@ while running:
     else:
         text_click = " "
 
+    # calculate scroe
+    if bgc == RED and can_cal_score:
+       score = score - 1
+       can_cal_score = False
+
+   
+    
     ################################
     ##########         #############
     ########## display #############
@@ -173,6 +195,7 @@ while running:
 
     # blit show text
     screen.blit(dino_info, (100,50))
+    screen.blit(score_text_img,(50,50))
 
     # x = dino.x
     # if key[pygame.K_RIGHT]:

@@ -51,7 +51,7 @@ class Dino:
         if self.mode == 'jump':
             self.jumping_speed -= 0.98 # js=9
             self.y -= self.jumping_speed  #js=10 y=490   #js=9 y=481   #js=8 y=473
-
+            
             # if touch the ground, reset all state
             if self.y >= self.ground:
                 self.jumping_speed = 0
