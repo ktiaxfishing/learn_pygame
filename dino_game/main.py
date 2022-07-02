@@ -27,11 +27,10 @@ dino_w = 100
 RED =(255,0,0)
 WHITE = (255,255,255)
 bgc = WHITE
-score = 10
+score = 2
 # load images
 pink_text_img = font.render("pink",False,PINK)
 blue_text_img = font.render("blue",False,BLUE)
-score_text_img = font.render(score,False,BLUE)
 
 
 click_text_img = font.render("click",False,PINK)
@@ -169,10 +168,21 @@ while running:
 
     # calculate scroe
     if bgc == RED and can_cal_score:
-       score = score - 1
-       can_cal_score = False
+        score = int(score)
+        score = score - 1
+        can_cal_score = False
+    
+    score = str(score)
+    score_text_img = font.render(score,False,BLUE)
+
+    # game over check
+    score = int(score)
+    
+    gameover_text_img = font.render("game over",False,PINK)
 
    
+        
+
     
     ################################
     ##########         #############
@@ -183,20 +193,24 @@ while running:
     # fill background
     screen.fill(bgc)
 
-    # blit text img
-    if text_color == 'pink':
-        screen.blit(pink_text_img,(20,20)) 
-    elif text_color == 'blue':
-        screen.blit(blue_text_img,(20,20))
 
-    # blit check click
-    if text_click == 'click':
-        screen.blit(click_text_img,(40,80))
+    # # blit text img
+    # if text_color == 'pink':
+    #     screen.blit(pink_text_img,(20,20)) 
+    # elif text_color == 'blue':
+    #     screen.blit(blue_text_img,(20,20))
 
-    # blit show text
-    screen.blit(dino_info, (100,50))
+    # # blit check click
+    # if text_click == 'click':
+    #     screen.blit(click_text_img,(40,80))
+
+    # # blit show text
+    # screen.blit(dino_info, (100,50))
     screen.blit(score_text_img,(50,50))
 
+    if score < 1:
+        
+        screen.blit(gameover_text_img,(200,100))
     # x = dino.x
     # if key[pygame.K_RIGHT]:
     #     x += 1
